@@ -1,5 +1,6 @@
 from sqlmodel import SQLModel, Field, Relationship
 from typing import TYPE_CHECKING
+from app.schema.sensor_schema import SensorBase
 
 if TYPE_CHECKING:
     from .esp_model import ESP
@@ -7,11 +8,10 @@ if TYPE_CHECKING:
     from .unit_model import Unit
     from .record_model import Record
 
-class Sensor(SQLModel, table=True):
+class Sensor(SensorBase, table=True):
     __tablename__ = "sensors"
 
     id: int | None = Field(primary_key=True, index=True, default=None)
-    name: str
     esp_id: int = Field(foreign_key="esps.id", index=True)
     unit_id: int = Field(foreign_key="units.id", index=True)
     type_id : int = Field(foreign_key="sensortypes.id", index=True)
