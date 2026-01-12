@@ -1,18 +1,21 @@
-from sqlmodel import SQLModel, Field, Enum, Column, Relationship
-from app.enum.device_status import DeviceStatus
+from sqlmodel import Field, Relationship, Column, Enum
 from typing import TYPE_CHECKING
+from app.schema.esp_schema import ESPBase
+from app.enum.device_status import DeviceStatus
 
 if TYPE_CHECKING:
     from .sensor_model import Sensor
     from .users_model import User
     from .field_model import FarmField
 
-class ESP(SQLModel, table=True):
+class ESP(ESPBase, table=True):
     __tablename__ = "esps"
 
     id: int | None = Field(primary_key=True, index=True, default=None)
+
     mac_address: str = Field(index=True, unique=True)
-    status: DeviceStatus = Field(default=DeviceStatus.OFFLINE, sa_column=Column(Enum(DeviceStatus)))
+    status: DeviceStatus = Field(default=DeviceStatus.ONLINE, sa_column=Column(Enum(DeviceStatus)))
+
     field_id: int | None = Field(default=None, foreign_key="farmfields.id", index=True)
     user_id: int | None = Field(default=None, foreign_key="users.id", index=True)
 
