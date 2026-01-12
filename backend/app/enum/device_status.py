@@ -1,7 +1,7 @@
-from sqlmodel import Enum
+import enum
 
-class DeviceStatus(str, Enum):
-    ONLINE = "online"
-    OFFLINE = "offline"
-    MAINTENANCE = "maintenance"
-    ERROR = "error"
+class DeviceStatus(str, enum.Enum):
+    ONLINE = "ONLINE"
+    OFFLINE = "OFFLINE"
+    MAINTENANCE = "MAINTENANCE"
+    ERROR = "ERROR"
