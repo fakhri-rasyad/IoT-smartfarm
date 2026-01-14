@@ -1,5 +1,6 @@
 from sqlmodel import SQLModel, Field
 from app.schema.esp_schema import ESPPublic
+from app.schema.user_schema import UserPublic
 
 class FieldBase(SQLModel):
     name: str
@@ -13,8 +14,7 @@ class FieldPublic(FieldBase):
     user_id:int
 
 class FieldPublicWithUser(FieldPublic):
-    # Ill add this after creating UserPublic
-    pass
+    user: UserPublic | None = None
 
 class FieldPublicWithEsp(FieldPublic):
     esps: list[ESPPublic] = []

@@ -1,4 +1,4 @@
-from sqlmodel import SQLModel, Field, Column, Enum
+from sqlmodel import SQLModel
 from app.enum.device_status import DeviceStatus
 
 class ESPBase(SQLModel):

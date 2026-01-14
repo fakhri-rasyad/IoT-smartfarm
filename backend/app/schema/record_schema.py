@@ -1,7 +1,6 @@
 from sqlmodel import SQLModel, Field
 from datetime import datetime
-from app.utils.utils import utc_now
-from app.schema.sensor_schema import SensorPublic
+from app.core.utils.utils import utc_now
 
 class RecordBase(SQLModel):
     timestamp: datetime = Field(index=True, default_factory=utc_now)
@@ -13,6 +12,3 @@ class RecordCreate(RecordBase):
 class RecordPublic(RecordBase):
     id: int
     sensor_id: int
-
-class RecordPublicWithSensor(RecordPublic):
-    sensor : SensorPublic | None = None
